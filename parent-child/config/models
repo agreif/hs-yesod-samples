@@ -15,3 +15,15 @@ Comment json -- Adding "json" causes ToJSON and FromJSON instances to be derived
     deriving Show
 
  -- By default this file is used in Model.hs (which is imported by Foundation.hs)
+
+Person
+    name Text
+    age Int
+    UniqueName name
+    deriving Show
+
+Address
+    personId PersonId
+    street Text
+    city Text
+    deriving Show
