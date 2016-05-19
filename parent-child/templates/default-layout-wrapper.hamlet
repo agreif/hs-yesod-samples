@@ -42,6 +42,6 @@ $newline never
 
     <script>
       document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
-  <body>
+  <body style="padding-top: 50px;">
     ^{pageBody pc}
 
