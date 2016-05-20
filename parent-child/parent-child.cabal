@@ -22,6 +22,7 @@ library
                      Settings.StaticFiles
                      Handler.Common
                      Handler.Home
+                     Handler.Person
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
@@ -83,6 +84,7 @@ library
                  , time
                  , case-insensitive
                  , wai
+                 , blaze-html
 
 executable         parent-child
     if flag(library-only)

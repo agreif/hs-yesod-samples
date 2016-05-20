@@ -10,12 +10,16 @@
     <div #navbar .collapse .navbar-collapse>
       <ul .nav .navbar-nav>
         <li .active">
-          <a href=#>Home
+          <a href=@{HomeR}>Home
         <li>
-          <a href=#about>About
+          <a href=@{PersonListR}>People
         <li>
           <a href=#contact>Contact
 
 <div .container>
-  <div style="padding: 40px 15px; text-align: center;">
+
+  $maybe msg <- mmsg
+    #{msg}
+
+  <div style="padding: 40px 15px;">
     ^{widget}

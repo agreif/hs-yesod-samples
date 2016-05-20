@@ -1,0 +1,23 @@
+<div .panel .panel-primary>
+  <div .panel-heading>
+    <div .btn-group .btn-group-xs style="float: right;">
+      <button .btn .btn-default .dropdown-toggle type=button data-toggle=dropdown aria-expanded=false aria-haspopup=true>
+        Actions
+        <span class="caret">
+      <ul .dropdown-menu .dropdown-menu-right>
+        <li>
+          <a href="@{PersonAddR}">Add Person
+    <h3 .panel-title>
+      People
+  <div .panel-body>
+    <table .table .table-hover>
+      <thead>
+        <tr>
+          <th>Name
+          <th>Age
+      <tbody>
+        $forall Entity personId person <- people
+          <tr style="cursor: pointer;" onclick="window.document.location='@{PersonDetailR personId}';">
+            <td>#{personName person}
+            <td>#{personAge person}
+

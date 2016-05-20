@@ -1,0 +1,15 @@
+<div .col-md-6>
+  <div .panel .panel-primary>
+    <div .panel-heading>
+      <h3 .panel-title>
+        Person
+    <div .panel-body>
+      <table .table .table-bordered>
+        <tbody>
+          <tr>
+            <th>Name
+            <td>#{personName person}
+          <tr>
+            <th>Age
+            <td>#{personAge person}
+

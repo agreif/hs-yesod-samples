@@ -4,8 +4,7 @@ module Handler.Common where
 import Data.FileEmbed (embedFile)
 import Import
 
--- These handlers embed files in the executable at compile time to avoid a
--- runtime dependency, and for efficiency.
+import Text.Blaze.Html (preEscapedToHtml)
 
 getFaviconR :: Handler TypedContent
 getFaviconR = do cacheSeconds $ 60 * 60 * 24 * 30 -- cache for a month
@@ -15,3 +14,15 @@ getFaviconR = do cacheSeconds $ 60 * 60 * 24 * 30 -- cache for a month
 getRobotsR :: Handler TypedContent
 getRobotsR = return $ TypedContent typePlain
                     $ toContent $(embedFile "config/robots.txt")
+
+renderFailureHtml :: [Text] -> Html
+renderFailureHtml texts =
+  toHtml [preEscapedToHtml ("<div class=\"alert alert-danger\">" :: Text),
+          intercalate (preEscapedToHtml ("<br>" :: Text)) $ map toHtml texts,
+          preEscapedToHtml ("</div>" :: Text)]
+
+renderInfoHtml :: [Text] -> Html
+renderInfoHtml texts =
+  toHtml [preEscapedToHtml ("<div class=\"alert alert-info\">" :: Text),
+          intercalate (preEscapedToHtml ("<br>" :: Text)) $ map toHtml texts,
+          preEscapedToHtml ("</div>" :: Text)]

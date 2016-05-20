@@ -1,0 +1,7 @@
+<div .panel .panel-primary>
+  <div .panel-heading>
+    <h3 .panel-title>
+      Add person
+  <div .panel-body>
+    <form .form-horizontal role=form method=post action=@{PersonAddR} enctype=#{formEnctype}>
+     ^{formWidget}
