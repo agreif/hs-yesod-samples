@@ -51,6 +51,8 @@ changes in `Handler/Admin.hs`
                 <p>Admin 1
                 <p>
                     <a href=@{AuthR LogoutR}>Logout
+                <p>
+                    <a href=@{AuthR CheckR}>Check
             |]
 
     getAdmin2R :: Handler Html
@@ -60,6 +62,8 @@ changes in `Handler/Admin.hs`
                 <p>Admin 2
                 <p>
                     <a href=@{AuthR LogoutR}>Logout
+                <p>
+                    <a href=@{AuthR CheckR}>Check
             |]
 
 
@@ -80,3 +84,4 @@ insert into db:
 
 
 ![pic1](pics/pic1.png)
+![pic2](pics/pic2.png)
