@@ -4,8 +4,8 @@ features:
 - one `Person` model has many `Address` relations
 - bootstrap layout
 
-[home](pics/pic1.png)
-[home](pics/pic2.png)
-[home](pics/pic3.png)
-[home](pics/pic4.png)
-[home](pics/pic5.png)
+![pic1](pics/pic1.png)
+![pic2](pics/pic2.png)
+![pic3](pics/pic3.png)
+![pic4](pics/pic4.png)
+![pic5](pics/pic5.png)
