@@ -9,12 +9,8 @@
         Parent-Child
     <div #navbar .collapse .navbar-collapse>
       <ul .nav .navbar-nav>
-        <li .active">
-          <a href=@{HomeR}>Home
-        <li>
+        <li .active>
           <a href=@{PersonListR}>People
-        <li>
-          <a href=#contact>Contact
 
 <div .container>
 
