@@ -62,7 +62,7 @@ instance Yesod App where
     --   a) Sets a cookie with a CSRF token in it.
     --   b) Validates that incoming write requests include that token in either a header or POST parameter.
     -- For details, see the CSRF documentation in the Yesod.Core.Handler module of the yesod-core package.
-    yesodMiddleware = defaultCsrfMiddleware
+    yesodMiddleware = defaultYesodMiddleware
 
     defaultLayout widget = do
         master <- getYesod
@@ -95,7 +95,7 @@ instance Yesod App where
           case maybeUser of
               Nothing -> return AuthenticationRequired
               Just _ -> return Authorized
-        | otherwise =return Authorized
+        | otherwise = return Authorized
 
     -- This function creates static content files in the static folder
     -- and names them based on a hash of their content. This allows
@@ -124,15 +124,6 @@ instance Yesod App where
             || level == LevelError
 
     makeLogger = return . appLogger
-
-
--- isAdmin = do
---     mu <- maybeAuthId
---     return $ case mu of
---         Nothing -> AuthenticationRequired
---         Just "admin" -> Authorized
---         Just _ -> Unauthorized "You must be an admin"
-
 
 -- How to run database actions.
 instance YesodPersist App where
