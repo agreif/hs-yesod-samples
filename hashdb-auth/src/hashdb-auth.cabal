@@ -23,6 +23,7 @@ library
                      Handler.Common
                      Handler.Home
                      Handler.Comment
+                     Handler.Admin
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
@@ -84,6 +85,7 @@ library
                  , time
                  , case-insensitive
                  , wai
+                 , yesod-auth-hashdb
 
 executable         hashdb-auth
     if flag(library-only)

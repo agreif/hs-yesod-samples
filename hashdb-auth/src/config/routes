@@ -7,3 +7,6 @@
 / HomeR GET POST
 
 /comments CommentR POST
+
+/admin/admin1 Admin1R GET !admin
+/admin/admin2 Admin2R GET !admin

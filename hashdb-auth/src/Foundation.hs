@@ -4,7 +4,7 @@ import Import.NoFoundation
 import Database.Persist.Sql (ConnectionPool, runSqlPool)
 import Text.Hamlet          (hamletFile)
 import Text.Jasmine         (minifym)
-import Yesod.Auth.OpenId    (authOpenId, IdentifierType (Claimed))
+import Yesod.Auth.HashDB
 import Yesod.Default.Util   (addStaticContentExternal)
 import Yesod.Core.Types     (Logger)
 import qualified Yesod.Core.Unsafe as Unsafe
@@ -62,7 +62,7 @@ instance Yesod App where
     --   a) Sets a cookie with a CSRF token in it.
     --   b) Validates that incoming write requests include that token in either a header or POST parameter.
     -- For details, see the CSRF documentation in the Yesod.Core.Handler module of the yesod-core package.
-    yesodMiddleware = defaultYesodMiddleware
+    yesodMiddleware = defaultCsrfMiddleware
 
     defaultLayout widget = do
         master <- getYesod
@@ -83,11 +83,19 @@ instance Yesod App where
     authRoute _ = Just $ AuthR LoginR
 
     -- Routes not requiring authentication.
-    isAuthorized (AuthR _) _ = return Authorized
-    isAuthorized FaviconR _ = return Authorized
-    isAuthorized RobotsR _ = return Authorized
-    -- Default to Authorized for now.
-    isAuthorized _ _ = return Authorized
+    -- isAuthorized (AuthR _) _ = return Authorized
+    -- isAuthorized FaviconR _ = return Authorized
+    -- isAuthorized RobotsR _ = return Authorized
+    -- -- Default to Authorized for now.
+    -- isAuthorized _ _ = return Authorized
+
+    isAuthorized route _
+        | "admin" `member` routeAttrs route = do
+          maybeUser <- maybeAuthId
+          case maybeUser of
+              Nothing -> return AuthenticationRequired
+              Just _ -> return Authorized
+        | otherwise =return Authorized
 
     -- This function creates static content files in the static folder
     -- and names them based on a hash of their content. This allows
@@ -117,6 +125,15 @@ instance Yesod App where
 
     makeLogger = return . appLogger
 
+
+-- isAdmin = do
+--     mu <- maybeAuthId
+--     return $ case mu of
+--         Nothing -> AuthenticationRequired
+--         Just "admin" -> Authorized
+--         Just _ -> Unauthorized "You must be an admin"
+
+
 -- How to run database actions.
 instance YesodPersist App where
     type YesodPersistBackend App = SqlBackend
@@ -140,15 +157,16 @@ instance YesodAuth App where
         x <- getBy $ UniqueUser $ credsIdent creds
         case x of
             Just (Entity uid _) -> return $ Authenticated uid
-            Nothing -> Authenticated <$> insert User
-                { userIdent = credsIdent creds
-                , userPassword = Nothing
-                }
+            Nothing -> return $ ServerError "error"
 
     -- You can add other plugins like Google Email, email or OAuth here
-    authPlugins _ = [authOpenId Claimed []]
+    authPlugins _ = [authHashDB (Just . UniqueUser)]
 
     authHttpManager = getHttpManager
+
+instance HashDBUser User where
+    userPasswordHash = userPassword
+    setPasswordHash h u = u { userPassword = Just h }
 
 instance YesodAuthPersist App
 
