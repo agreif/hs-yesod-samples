@@ -27,7 +27,7 @@ example calls:
     $ curl -H 'Content-Type: application/json' -X PUT -d '{ "id": 1, "post_id": 1, "content": "comment content 1 modified" }' http://localhost:3000/posts/1/comments/1
 
     $ curl -H 'Content-Type: application/json' -X GET http://localhost:3000/posts/1/comments/1
-{"comment":{"post_id":"1","content":"comment content 1 modified","id":"1"}}
+    {"comment":{"post_id":"1","content":"comment content 1 modified","id":"1"}}
 
     $ curl -H 'Content-Type: application/json' -X DELETE http://localhost:3000/posts/1/comments/1
 
