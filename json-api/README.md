@@ -1,7 +1,7 @@
 # Json-Api sample
 
 features:
-- responds to somefollowing json calls:
+responds to ollowing json calls:
 
     /posts                             PostsR    GET POST
     /posts/#PostId                     PostR     GET PUT DELETE
