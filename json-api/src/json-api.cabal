@@ -20,9 +20,7 @@ library
                      Model
                      Settings
                      Settings.StaticFiles
-                     Handler.Common
-                     Handler.Home
-                     Handler.Comment
+                     Handler.JsonApi
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
@@ -84,6 +82,7 @@ library
                  , time
                  , case-insensitive
                  , wai
+                 , http-types
 
 executable         json-api
     if flag(library-only)
