@@ -1,4 +1,4 @@
-# Json-Api sample
+# Json sample
 
 responds to following json calls:
 
