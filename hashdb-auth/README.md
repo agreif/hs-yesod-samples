@@ -19,7 +19,7 @@ changes in `Foundation.hs`:
             | otherwise =return Authorized
 
 
-    instance YesodPersist App where
+    instance YesodAuth App where
         ...
         authenticate creds = runDB $ do
             x <- getBy $ UniqueUser $ credsIdent creds
@@ -27,7 +27,7 @@ changes in `Foundation.hs`:
                 Just (Entity uid _) -> return $ Authenticated uid
                 Nothing -> return $ ServerError "error"
         ...
-	authPlugins _ = [authHashDB (Just . UniqueUser)]
+        authPlugins _ = [authHashDB (Just . UniqueUser)]
 
     instance HashDBUser User where
         userPasswordHash = userPassword
